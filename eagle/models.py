@@ -4,5 +4,32 @@ from django.contrib.auth.models import AbstractUser
 class NeighbourHood(models.Model):
   name = models.CharField(max_length=50)
   location = models.CharField(max_length=50)
-  Occupants_count=models.PositiveSmallIntegerField()
-  
+  occupants_count=models.PositiveSmallIntegerField()
+
+  def save_neighbourhood(self):
+        self.save()
+
+
+  @classmethod
+  def delete_neighbourhood(cls,name):
+    delete=NeighbourHood.objects.filter(name=name).delete()
+    return delete
+
+  @classmethod
+  def find_neigborhood(cls,id):
+    neighbourhood = NeighbourHood.objects.filter(pk=id) 
+    return neighbourhood
+  @classmethod
+  def update_neighborhood(cls,name,new_name):
+    update = NeighbourHood.objects.filter(name=name).update(name=new_name)
+    return update 
+  @classmethod
+  def update_neighborhood_occupants(cls,name,occupants):
+    update_occupants = NeighbourHood.objects.filter(name=name).update(occupants_count=occupants)
+    return update_occupants
+
+  def __str__(self):
+        return self.name
+
+  class Meta:
+        ordering = ['pk']   
