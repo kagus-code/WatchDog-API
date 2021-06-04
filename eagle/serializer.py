@@ -8,15 +8,25 @@ class NeighbourhoodSerializer(serializers.ModelSerializer):
     model = NeighbourHood
     fields = ('name','location','occupants_count')  
 
-  def create(self, validated_data):
-    return NeighbourHood.objects.create(validated_data)
 
-  def update(self,instance,validated_data):
-    instance.name = validated_data.get('name',instance.name)
-    instance.location = validated_data.get('location',instance.location)
-    instance.occupants_count = validated_data.get('occupants_count',instance.occupants_count)
-    instance.save()
-    return instance
+
+
+
+
+
+
+
+  # def create(self, validated_data):
+  #   hood = NeighbourHood.objects.create(validated_data)
+  #   hood.save()
+  #   return hood
+
+  # def update(self,instance,validated_data):
+  #   instance.name = validated_data.get('name',instance.name)
+  #   instance.location = validated_data.get('location',instance.location)
+  #   instance.occupants_count = validated_data.get('occupants_count',instance.occupants_count)
+  #   instance.save()
+  #   return instance
 
 
 

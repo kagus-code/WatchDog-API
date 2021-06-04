@@ -15,6 +15,11 @@ from rest_framework import permissions, status
 class NeighbourhoodApiView(APIView):
   serializer_class = NeighbourhoodSerializer
 
+  def get(self, request, format=  None):
+    all_hoods = NeighbourHood.objects.all
+    serializers = NeighbourhoodSerializer(all_hoods,many=True)
+    return Response (serializers.data)
+
   def post(self,request):
     serializer =self.serializer_class(data=request.data)
     serializer.is_valid(raise_exception=True)
