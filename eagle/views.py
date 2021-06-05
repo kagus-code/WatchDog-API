@@ -20,20 +20,15 @@ from rest_framework import filters
 
 class NeighbourhoodApiView(APIView):
   serializer_class = NeighbourhoodSerializer
-
   def get(self, request, format=  None):
     all_hoods = NeighbourHood.objects.all()
     serializers = NeighbourhoodSerializer(all_hoods,many=True)
     return Response (serializers.data)
-
   def post(self,request):
     serializer =self.serializer_class(data=request.data)
-
-
     if serializer.is_valid(raise_exception=True):
       serializer.save()
       neighbourhood_data =serializer.data
-
       response={
         "data":{
             "neighbourhood":dict(neighbourhood_data),
@@ -41,12 +36,9 @@ class NeighbourhoodApiView(APIView):
             "message":"neighbourhood added successfully",
         }
       }
-
-
       return Response(response, status=status.HTTP_201_CREATED)
     else:
       return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class SingleHood(APIView):
   def get_hood(self,pk):
@@ -73,8 +65,6 @@ class SingleHood(APIView):
     hood = self.get_hood(pk)
     hood.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)  
-
-
 class SearchHood(generics.ListCreateAPIView):
   search_fields =['name']
   filter_backends = (filters.SearchFilter,)
