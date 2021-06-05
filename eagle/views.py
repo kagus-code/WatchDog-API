@@ -10,8 +10,8 @@ from rest_framework import generics
 # api imports 
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import  NeighbourHood,Business,Post
-from .serializer import NeighbourhoodSerializer,BusinessSerializer,PostSerializer
+from .models import  NeighbourHood,Business,Post,Profile,User
+from .serializer import NeighbourhoodSerializer,BusinessSerializer,PostSerializer,ProfileSerializer,UserSerializer
 from rest_framework import permissions, status
 from rest_framework import filters
 
@@ -101,7 +101,7 @@ class BusinessSortAPIView(APIView):
   def get(self,request,hood):
     hood=self.kwargs.get('hood')
     business = Business.objects.filter(neighbourhood=hood)
-    serializers= b=BusinessSerializer(business, many = True)
+    serializers=BusinessSerializer(business, many = True)
     return Response(serializers.data)
 
 class SingleBusiness(APIView):
@@ -134,9 +134,6 @@ class SearchBusiness(generics.ListCreateAPIView):
   filter_backends = (filters.SearchFilter,)
   queryset = Business.objects.all()
   serializer_class = BusinessSerializer
-
-
-
 
 class PostApiView(APIView):
   serializer_class = PostSerializer
@@ -197,3 +194,109 @@ class PostSortAPIView(APIView):
     post = Post.objects.filter(hood=hood)
     serializers= PostSerializer(post, many = True)
     return Response(serializers.data)
+
+
+class ProfileApiView(APIView):
+  serializer_class = ProfileSerializer
+  def get(self, request, format=  None):
+    all_profiles = Profile.objects.all()
+    serializers = ProfileSerializer(all_profiles,many=True)
+    return Response (serializers.data)
+  def post(self,request):
+    serializer =self.serializer_class(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+      serializer.save()
+      business_data =serializer.data
+      response={
+        "data":{
+            "business":dict(business_data),
+            "status":"success",
+            "message":"profile added successfully",
+        }
+      }
+      return Response(response, status=status.HTTP_201_CREATED)
+    else:
+      return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SingleProfile(APIView):
+  def get_profile(self,pk):
+    try:
+      return Profile.objects.get(pk=pk)
+    except Profile.DoesNotExist:
+      return Http404
+
+  def get(self,request,pk,format=None):
+    profile =self.get_profile(pk)
+    serializers = ProfileSerializer(profile)
+    return Response(serializers.data)    
+  
+  def put(self,request,pk,format=None):
+    profile = self.get_profile(pk)
+    serializers = ProfileSerializer(profile , request.data)
+    if serializers.is_valid():
+      serializers.save()
+      return Response(serializers.data)
+    else:
+      return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)  
+  
+  def delete(self, request, pk, format=None):
+    profile = self.get_profile(pk)
+    profile.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)  
+
+
+
+class UserApiView(APIView):
+  serializer_class = UserSerializer
+  def get(self, request, format=  None):
+    all_users = User.objects.all()
+    serializers = UserSerializer(all_users,many=True)
+    return Response (serializers.data)
+  def post(self,request):
+    serializer =self.serializer_class(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+      serializer.save()
+      user_data =serializer.data
+      response={
+        "data":{
+            "user":dict(user_data),
+            "status":"success",
+            "message":"user added successfully",
+        }
+      }
+      return Response(response, status=status.HTTP_201_CREATED)
+    else:
+      return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserSortAPIView(APIView):
+  def get(self,request,hood):
+    hood=self.kwargs.get('hood')
+    user = User.objects.filter(neighbourhood=hood)
+    serializers= b=UserSerializer(user, many = True)
+    return Response(serializers.data)
+
+class SingleUser(APIView):
+  def get_user(self,pk):
+    try:
+      return User.objects.get(pk=pk)
+    except User.DoesNotExist:
+      return Http404
+
+  def get(self,request,pk,format=None):
+    user =self.get_user(pk)
+    serializers = UserSerializer(user)
+    return Response(serializers.data)    
+  
+  def put(self,request,pk,format=None):
+    user = self.get_user(pk)
+    serializers = UserSerializer(user , request.data)
+    if serializers.is_valid():
+      serializers.save()
+      return Response(serializers.data)
+    else:
+      return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)  
+  
+  def delete(self, request, pk, format=None):
+    user = self.get_user(pk)
+    user.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)  

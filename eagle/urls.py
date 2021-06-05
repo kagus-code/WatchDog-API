@@ -22,5 +22,11 @@ urlpatterns = [
   re_path(r'^post-search/', views.SearchPost.as_view(), name='search_post'),
   re_path(r'^post-hood/(?P<hood>\w+)/$', views.PostSortAPIView.as_view(), name='post_hood'),
 
+# profile urls
+  re_path(r'profile-get/(?P<pk>[0-9]+)/$',views.SingleProfile.as_view(),name="single-profile"),
+  re_path(r'^profile-post/$', views.ProfileApiView.as_view(),name="post-profile"),
 
+#users urls
+  re_path(r'user-get/(?P<pk>[0-9]+)/$',views.SingleUser.as_view(),name="single-user"),
+  re_path(r'^user-post/$', views.UserApiView.as_view(),name="post-user"),
 ]
