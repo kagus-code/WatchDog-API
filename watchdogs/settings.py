@@ -13,6 +13,9 @@ import os
 import dj_database_url
 from decouple import config,Csv
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -66,6 +69,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'eagle',
     'rest_framework',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -146,3 +150,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+cloudinary.config( 
+  cloud_name = config('CLOUD_NAME'), 
+  api_key = config("API_KEY"), 
+  api_secret = config("API_SECRET") 
+)

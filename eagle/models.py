@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from cloudinary.models import CloudinaryField
 
 class NeighbourHood(models.Model):
   name = models.CharField(max_length=50)
@@ -29,8 +30,14 @@ class NeighbourHood(models.Model):
     update_occupants = NeighbourHood.objects.filter(name=name).update(occupants_count=occupants)
     return update_occupants
 
+  @classmethod
+  def search_neighbourhood(cls,search_term):
+    search = NeighbourHood.objects.filter(name__icontains= search_term)  
+    return search
+
   def __str__(self):
         return self.name
 
   class Meta:
         ordering = ['pk']   
+
