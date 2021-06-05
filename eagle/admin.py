@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import NeighbourHood
+from .models import NeighbourHood,User
 
 admin.site.register(NeighbourHood)
-# admin.site.register(Project)
+admin.site.register(User)
 # admin.site.register(Review)
