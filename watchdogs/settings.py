@@ -171,6 +171,6 @@ REST_FRAMEWORK = {
 # LOGIN_REDIRECT_URL = 'post-hood'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200/"
+    "http://localhost:4200"
     
 ]
