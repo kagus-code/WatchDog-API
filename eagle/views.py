@@ -15,8 +15,23 @@ from .serializer import NeighbourhoodSerializer,BusinessSerializer,PostSerialize
 from rest_framework import permissions, status
 from rest_framework import filters
 
+# authentication api view imports
 
-# Create your views here.
+
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+
+class ProfileAPIView(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+        content = {
+            'user': str(request.user),  # `django.contrib.auth.User` instance.
+            'auth': str(request.auth),  # None
+        }
+        return Response(content)
 
 class NeighbourhoodApiView(APIView):
   serializer_class = NeighbourhoodSerializer

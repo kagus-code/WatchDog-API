@@ -158,3 +158,12 @@ cloudinary.config(
   api_key = config("API_KEY"), 
   api_secret = config("API_SECRET") 
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+# LOGIN_REDIRECT_URL = 'post-hood'
