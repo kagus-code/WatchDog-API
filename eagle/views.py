@@ -18,7 +18,7 @@ from rest_framework import filters
 # authentication api view imports
 
 
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -262,6 +262,8 @@ class SingleProfile(APIView):
 
 
 class UserApiView(APIView):
+  authentication_classes = [TokenAuthentication]
+  permission_classes = [IsAuthenticated]
   serializer_class = UserSerializer
   def get(self, request, format=  None):
     all_users = User.objects.all()

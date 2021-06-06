@@ -1,5 +1,6 @@
 from django.urls import path, re_path
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 from . import views
@@ -32,6 +33,10 @@ urlpatterns = [
 #users urls
   re_path(r'user-get/(?P<pk>[0-9]+)/$',views.SingleUser.as_view(),name="single-user"),
   re_path(r'^user-post/$', views.UserApiView.as_view(),name="post-user"),
+
+# authentication path
+ re_path(r'^auth/', obtain_auth_token)
+
 ]
 
 
