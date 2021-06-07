@@ -35,7 +35,7 @@ urlpatterns = [
   re_path(r'^user-post/$', views.UserApiView.as_view(),name="post-user"),
 
 # authentication path
- re_path(r'^auth/', obtain_auth_token)
+ re_path(r'^api-token-auth/', obtain_auth_token)
 
 ]
 

@@ -262,8 +262,8 @@ class SingleProfile(APIView):
 
 
 class UserApiView(APIView):
-  authentication_classes = [TokenAuthentication]
-  permission_classes = [IsAuthenticated]
+  # authentication_classes = [TokenAuthentication]
+  # permission_classes = [IsAuthenticated]
   serializer_class = UserSerializer
   def get(self, request, format=  None):
     all_users = User.objects.all()
