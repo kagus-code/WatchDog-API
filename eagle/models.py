@@ -66,11 +66,11 @@ class Business(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=120, null=True)
+    name = models.CharField(max_length=120, null=True)
     post = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user')
-    hood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, related_name='post_hood')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_user', null=True)
+    hood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, related_name='post_hood', null=True)
 
     def __str__(self):
         return self.name
