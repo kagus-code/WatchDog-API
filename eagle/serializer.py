@@ -6,7 +6,7 @@ from .models import Business, NeighbourHood, Post, Profile, User
 class NeighbourhoodSerializer(serializers.ModelSerializer):
   class Meta:
     model = NeighbourHood
-    fields = ('name','location','occupants_count')  
+    fields = '__all__' 
 
 class BusinessSerializer(serializers.ModelSerializer):
 
@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 
    class Meta:
         model = User
-        fields = ['email', 'username', 'password']
+        fields = ['email', 'username', 'password','neighbourhood']
         extra_kwargs = {'password': {'write_only': True}}
 
    def create(self, validated_data):

@@ -61,7 +61,7 @@ class Business(models.Model):
         return self.name
 
   class Meta:
-        ordering = ['pk'] 
+        ordering = ['-pk'] 
 
 
 
