@@ -59,3 +59,29 @@ class ProfileTestClass(TestCase):
         Profile.objects.all().delete() 
         NeighbourHood.objects.all().delete() 
 
+
+class BusinessTestClass(TestCase):
+  def setUp(self):
+    self.neighbourhood = NeighbourHood(name='Kairu',location='Ruiru',occupants_count=50,health_contact=2221115,police_contact=2255562)
+    self.neighbourhood.save_neighbourhood()
+
+    self.business = Business(name='shopiz',description='selling',email="shopiz@gmail.com", neighbourhood=self.neighbourhood)
+  def test_instance(self):
+     self.assertTrue(isinstance(self.business, Business))
+
+  def tearDown(self):
+        Business.objects.all().delete() 
+        NeighbourHood.objects.all().delete()    
+
+class PostTestClass(TestCase):
+  def setUp(self):
+    self.neighbourhood = NeighbourHood(name='Kairu',location='Ruiru',occupants_count=50,health_contact=2221115,police_contact=2255562)
+    self.neighbourhood.save_neighbourhood()
+
+    self.post = Post(name='kagus',post='fire',date=2012-20-14, hood=self.neighbourhood)
+  def test_instance(self):
+     self.assertTrue(isinstance(self.post, Post))
+
+  def tearDown(self):
+        Post.objects.all().delete() 
+        NeighbourHood.objects.all().delete()   
