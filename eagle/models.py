@@ -82,6 +82,7 @@ class Post(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile_user',null=True)
+    user_name = models.CharField(max_length=30,null=True)
     profile_pic = CloudinaryField('image',null=True)
     bio = models.TextField(max_length=500,  blank=True)
     email = models.EmailField()
