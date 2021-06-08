@@ -56,7 +56,6 @@ class Business(models.Model):
   neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True,related_name='business_neighbourhood')
   email =models.EmailField()
 
-
   def __str__(self):
         return self.name
 

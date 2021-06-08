@@ -5,6 +5,8 @@ from rest_framework import serializers
 from rest_framework import response
 
 from rest_framework import generics
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
 
 
 # api imports 
@@ -111,6 +113,18 @@ class BusinessApiView(APIView):
       return Response(response, status=status.HTTP_201_CREATED)
     else:
       return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+   
+
+  def put(self,request,format=None):
+    business_data = JSONParser().parse(request)
+    business= Business.objects.get(email=business_data["email"])
+    serializers = BusinessSerializer(business,data=business_data)
+    if serializers.is_valid():
+      serializers.save()
+      return Response(serializers.data)
+    else:
+      return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
+
 
 class BusinessSortAPIView(APIView):
   def get(self,request,hood):
