@@ -1,16 +1,23 @@
 #  Watch-Dog Web App
 
-####  04/06/2021
+#### This an API endpoint for the watch-dog app which lets a user know whats happening in their neighbourhood,  04/06/2021
 
 #### By **Eston Kagwima**
 
 ## Description
-
+ this is an end point for a web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different handyman to meeting announcements or even alerts.
 
 This project was generated with [Django](https://docs.djangoproject.com/en/3.2/) version 3.2.3
 
 
 ### User stories Specification
+- Sign in with the application to start using.
+- Set up a profile about me and a general location and my neighborhood name.
+- Find a list of different businesses in my neighborhood.
+- Find Contact Information for the health department and Police authorities near my neighborhood.
+- Create Posts that will be visible to everyone in my neighborhood.
+- Change My neighborhood when I decide to move out.
+- Only view details of a single neighborhood.
 
 ## Setup/Installation Requirements
 - install Python3.9
@@ -45,16 +52,10 @@ Create .env file and paste paste the following and fill  required fields:
 
 - Django version 3.2.3
 - Python
-- JavaScript
-- HTML
-- CSS
-- Bootstrap
 - Postgressql
 
 ## link to live site on heroku
-
-
-
+https://kagus-watchdog.herokuapp.com/
 
 ## Support and contact details
 
