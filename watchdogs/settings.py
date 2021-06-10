@@ -183,6 +183,7 @@ REST_FRAMEWORK = {
 # LOGIN_REDIRECT_URL = 'post-hood'
 
 CORS_ALLOWED_ORIGINS = [
+    "https://kagus-code.github.io",
     "http://localhost:4200"
     
 ]
