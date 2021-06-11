@@ -21,7 +21,7 @@ This project was generated with [Django](https://docs.djangoproject.com/en/3.2/)
 
 ## Setup/Installation Requirements
 - install Python3.9
-- Clone this repository `https://github.com/kagus-code/Tuzo-Awards.git`
+- Clone this repository `https://github.com/kagus-code/WatchDog-API`
 - Change directory to the project directory using  the `cd` command
 - Open project on VSCode
 - If you want to use virtualenv: `virtualenv ENV && source ENV/bin/activate`
